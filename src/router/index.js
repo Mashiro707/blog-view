@@ -1,5 +1,4 @@
 /* eslint-disable no-dupe-keys */
-/* eslint-disable no-undef */
 import Vue from 'vue'
 import Router from 'vue-router'
 
@@ -12,13 +11,18 @@ const routes = [
   {
     path: '/',
     component: Layout,
-    redirect: '/index',
-    component: () => import('@/views/index/Index.vue')
-  },
-  {
-    path: '/article',
-    component: Layout,
-    component: () => import('@/views/article/Article.vue')
+    children: [
+      {
+        path: '',
+        name: 'index',
+        component: () => import('@/views/index/Index.vue')
+      },
+      {
+        path: 'article/:id',
+        name: 'article',
+        component: () => import('@/views/article/Article.vue')
+      }
+    ]
   }
 ]
 

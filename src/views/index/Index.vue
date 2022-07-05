@@ -2,67 +2,25 @@
   <div class="container px-4 px-lg-5">
     <div class="row gx-4 gx-lg-5 justify-content-center">
       <div class="col-md-10 col-lg-8 col-xl-7">
-        <!-- Post preview-->
-        <div class="post-preview">
-          <a href="post.html">
-            <h2 class="post-title">Man must explore, and this is exploration at its greatest</h2>
-            <h3 class="post-subtitle">Problems look mighty small from 150 miles up</h3>
-          </a>
-          <p class="post-meta">
-            Posted by
-            <a href="#!">Start Bootstrap</a>
-            on September 24, 2022
-          </p>
+        <div v-for="article in articleList" :key="article.id">
+          <!-- Post preview-->
+          <div class="post-preview">
+            <router-link :to="'/article/' + article.id">
+              <h2 class="post-title">{{ article.title }}</h2>
+              <h3 class="post-subtitle">{{ article.description }}</h3>
+            </router-link>
+            <p class="post-meta">
+              Posted by
+              <a href="">Mashiro</a>
+              on {{ article.create_time | dateFilter }}
+            </p>
+          </div>
+          <!-- Divider-->
+          <hr class="my-4">
         </div>
-        <!-- Divider-->
-        <hr class="my-4">
-        <!-- Post preview-->
-        <div class="post-preview">
-          <a href="post.html">
-            <h2 class="post-title">I believe every human has a finite number of heartbeats. I don't intend
-              to waste any of mine.</h2>
-          </a>
-          <p class="post-meta">
-            Posted by
-            <a href="#!">Start Bootstrap</a>
-            on September 18, 2022
-          </p>
-        </div>
-        <!-- Divider-->
-        <hr class="my-4">
-        <!-- Post preview-->
-        <div class="post-preview">
-          <a href="post.html">
-            <h2 class="post-title">Science has not yet mastered prophecy</h2>
-            <h3 class="post-subtitle">We predict too much for the next year and yet far too little for the
-              next ten.</h3>
-          </a>
-          <p class="post-meta">
-            Posted by
-            <a href="#!">Start Bootstrap</a>
-            on August 24, 2022
-          </p>
-        </div>
-        <!-- Divider-->
-        <hr class="my-4">
-        <!-- Post preview-->
-        <div class="post-preview">
-          <a href="post.html">
-            <h2 class="post-title">Failure is not an option</h2>
-            <h3 class="post-subtitle">Many say exploration is part of our destiny, but it’s actually our
-              duty to future generations.</h3>
-          </a>
-          <p class="post-meta">
-            Posted by
-            <a href="#!">Start Bootstrap</a>
-            on July 8, 2022
-          </p>
-        </div>
-        <!-- Divider-->
-        <hr class="my-4">
         <!-- Pager-->
-        <div class="d-flex justify-content-end mb-4"><a class="btn btn-primary text-uppercase" href="#!">Older
-          Posts →</a></div>
+        <div v-if="pageNum > 1" class="d-flex justify-content-end mb-4" style="float: left;"><a class="btn btn-lg btn-outline-dark text-uppercase" href="#!">Newer Posts</a></div>
+        <div class="d-flex justify-content-end mb-4"><a class="btn btn-lg btn-outline-dark text-uppercase" href="#!">Older Posts</a></div>
       </div>
     </div>
   </div>
@@ -70,8 +28,37 @@
 
 <script>
 import '@/style/styles.css'
-
+import { getArticleList } from '@/api/index'
 export default {
-  name: 'Index'
+  name: 'Index',
+  data() {
+    return {
+      pageNum: 1,
+      articleList: [
+        {
+          id: 1,
+          title: 'title1',
+          description: 'description1',
+          create_time: 1657002550
+        },
+        {
+          id: 2,
+          title: 'title2',
+          description: 'description2',
+          create_time: 1657002550
+        }
+      ]
+    }
+  },
+  created() {
+    this.getData()
+  },
+  methods: {
+    getData() {
+      getArticleList(this.pageNum).then(res => {
+        this.articleList = res.data
+      })
+    }
+  }
 }
 </script>
