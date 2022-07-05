@@ -5,8 +5,7 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import 'bootstrap/dist/js/bootstrap.min'
 
 new Vue({
-    el: '#app',
-    router,
-    store,
-    render: h => h(App)
-  })
+  el: '#app',
+  router,
+  render: h => h(App)
+})

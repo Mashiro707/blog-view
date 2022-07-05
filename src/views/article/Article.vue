@@ -65,16 +65,9 @@
             fragile, so delicate, that if you touched it with a finger it would
             crumble and fall apart. Seeing this has to change a man.
           </p>
-          <a href="#!"
-            ><img
-              class="img-fluid"
-              src="assets/img/post-sample-image.jpg"
-              alt="..."
-          /></a>
-          <span class="caption text-muted"
-            >To go places and do things that have never been done before –
-            that’s what living is all about.</span
-          >
+          <a href="#!"><img class="img-fluid" src="assets/img/post-sample-image.jpg" alt="..."></a>
+          <span class="caption text-muted">To go places and do things that have never been done before –
+            that’s what living is all about.</span>
           <p>
             Space, the final frontier. These are the voyages of the Starship
             Enterprise. Its five-year mission: to explore strange new worlds, to
@@ -90,9 +83,7 @@
             Placeholder text by
             <a href="http://spaceipsum.com/">Space Ipsum</a>
             &middot; Images by
-            <a href="https://www.flickr.com/photos/nasacommons/"
-              >NASA on The Commons</a
-            >
+            <a href="https://www.flickr.com/photos/nasacommons/">NASA on The Commons</a>
           </p>
         </div>
       </div>
@@ -101,7 +92,7 @@
 </template>
 
 <script>
-export default {};
+export default {}
 </script>
 
 <style>

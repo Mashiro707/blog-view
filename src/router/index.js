@@ -1,20 +1,25 @@
+/* eslint-disable no-dupe-keys */
+/* eslint-disable no-undef */
 import Vue from 'vue'
 import Router from 'vue-router'
 
 Vue.use(Router)
+
+/* Layout */
+import Layout from '@/layout'
 
 const routes = [
   {
     path: '/',
     component: Layout,
     redirect: '/index',
-    component: () => import('@/views/Index.vue'),
+    component: () => import('@/views/index/Index.vue')
   },
   {
     path: '/article',
     component: Layout,
-    component: () => import('@/views/Article.vue'),
-  },
+    component: () => import('@/views/article/Article.vue')
+  }
 ]
 
 const createRouter = () => new Router({
