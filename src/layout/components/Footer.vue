@@ -14,7 +14,9 @@
               </a>
             </li>
           </ul>
-          <div class="small text-center text-muted fst-italic">Copyright &copy; Your Website 2022</div>
+          <div class="small text-center text-muted fst-italic">
+            Copyright &copy; Your Website 2022
+          </div>
         </div>
       </div>
     </div>
@@ -28,5 +30,4 @@ export default {
 }
 </script>
 
-<style>
-</style>
+<style></style>

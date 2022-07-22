@@ -1,21 +1,42 @@
 <template>
-  <article class="mb-4">
-    <div class="container px-4 px-lg-5">
-      <div class="row gx-4 gx-lg-5 justify-content-center">
-        <v-md-preview :text="articleDetail.content" height="400px" />
+  <div>
+    <article class="mb-4">
+      <div class="container px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+          <v-md-preview :text="articleDetail.content" height="400px" />
+        </div>
       </div>
+    </article>
+    <div class="comments-container">
+      <Giscus
+        id="comments"
+        repo="mashiro707/blog-comments"
+        repo-id="R_kgDOHssq6A"
+        category="Announcements"
+        category-id="DIC_kwDOHssq6M4CQXcD"
+        mapping="url"
+        reactions-enabled="1"
+        emit-metadata="0"
+        input-position="top"
+        theme="light_tritanopia"
+        lang="zh-CN"
+        loading="lazy"
+      />
     </div>
-  </article>
+  </div>
 </template>
+
+<script setup>
+// eslint-disable-next-line no-unused-vars
+import Giscus from '@giscus/vue'
+</script>
 
 <script>
 import { getArticleDetail } from '@/api/article'
 export default {
   data() {
     return {
-      articleDetail: {
-        content: '# 1231231'
-      }
+      articleDetail: {}
     }
   },
   created() {
@@ -23,7 +44,7 @@ export default {
   },
   methods: {
     getArticle() {
-      getArticleDetail(this.$route.params.articleID).then(res => {
+      getArticleDetail(this.$route.query.id).then((res) => {
         this.articleDetail = res.data
       })
     }
@@ -32,4 +53,13 @@ export default {
 </script>
 
 <style>
+#comments::part(iframe) {
+  max-width: 640px;
+  margin: auto;
+  display: flex;
+}
+.comments-container {
+  max-height: 640px;
+  overflow-y: scroll;
+}
 </style>

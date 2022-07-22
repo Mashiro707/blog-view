@@ -1,11 +1,11 @@
 import request from '@/utils/request'
 
-export function getArticleDetail(articleID) {
+export function getArticleDetail(id) {
   return request({
     url: '/article',
-    method: 'get',
+    method: 'post',
     params: {
-      articleID
+      id
     }
   })
 }

@@ -1,8 +1,4 @@
-/* eslint-disable no-dupe-keys */
-import Vue from 'vue'
-import Router from 'vue-router'
-
-Vue.use(Router)
+import * as VueRouter from 'vue-router'
 
 /* Layout */
 import Layout from '@/layout'
@@ -18,7 +14,7 @@ const routes = [
         component: () => import('@/views/index/Index.vue')
       },
       {
-        path: 'article/:id',
+        path: 'article',
         name: 'article',
         component: () => import('@/views/article/Article.vue')
       }
@@ -26,10 +22,11 @@ const routes = [
   }
 ]
 
-const createRouter = () => new Router({
-  mode: 'history',
-  routes
-})
+const createRouter = () =>
+  VueRouter.createRouter({
+    history: VueRouter.createWebHistory(),
+    routes
+  })
 
 const router = createRouter()
 

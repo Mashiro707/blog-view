@@ -5,22 +5,36 @@
         <div v-for="article in articleList" :key="article.id">
           <!-- Post preview-->
           <div class="post-preview">
-            <router-link :to="'/article/' + article.id">
+            <router-link :to="{ path: '/article', query: { id: article.id }}">
               <h2 class="post-title">{{ article.title }}</h2>
-              <h3 class="post-subtitle">{{ article.description }}</h3>
+              <v-md-preview class="post-subtitle" :text="article.description" />
             </router-link>
             <p class="post-meta">
               Posted by
               <a href="">Mashiro</a>
-              on {{ article.create_time | dateFilter }}
+              on {{ $filters.dateFormat(article.create_time) }}
             </p>
           </div>
           <!-- Divider-->
           <hr class="my-4">
         </div>
         <!-- Pager-->
-        <div v-if="pageNum > 1" class="d-flex justify-content-end mb-4" style="float: left;"><a class="btn btn-lg btn-outline-dark text-uppercase" href="#!">Newer Posts</a></div>
-        <div class="d-flex justify-content-end mb-4"><a class="btn btn-lg btn-outline-dark text-uppercase" href="#!">Older Posts</a></div>
+        <div
+          v-if="requestInfo.page_num > 1"
+          class="d-flex justify-content-end mb-4"
+          style="float: left"
+        >
+          <a
+            class="btn btn-lg btn-outline-dark text-uppercase"
+            @click="handleCurrentChange(-1)"
+          >Newer Posts</a>
+        </div>
+        <div class="d-flex justify-content-end mb-4">
+          <a
+            class="btn btn-lg btn-outline-dark text-uppercase"
+            @click="handleCurrentChange(1)"
+          >Older Posts</a>
+        </div>
       </div>
     </div>
   </div>
@@ -33,21 +47,12 @@ export default {
   name: 'Index',
   data() {
     return {
-      pageNum: 1,
-      articleList: [
-        {
-          id: 1,
-          title: 'title1',
-          description: 'description1',
-          create_time: 1657002550
-        },
-        {
-          id: 2,
-          title: 'title2',
-          description: 'description2',
-          create_time: 1657002550
-        }
-      ]
+      requestInfo: {
+        page_num: 1,
+        page_size: 5
+      },
+      total: 0,
+      articleList: []
     }
   },
   created() {
@@ -55,9 +60,17 @@ export default {
   },
   methods: {
     getData() {
-      getArticleList(this.pageNum).then(res => {
-        this.articleList = res.data
+      getArticleList(this.requestInfo).then((res) => {
+        if (res.code === 200) {
+          this.articleList = res.data.list
+          this.total = res.data.total
+        }
       })
+    },
+    // 监听页码改变事件
+    handleCurrentChange(val) {
+      this.requestInfo.page_num = this.requestInfo.page_num + val
+      this.getData()
     }
   }
 }

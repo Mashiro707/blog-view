@@ -6,4 +6,9 @@ const request = axios.create({
   timeout: 5000 // request timeout
 })
 
+// 响应拦截
+request.interceptors.response.use((config) => {
+  return config.data
+})
+
 export default request

@@ -6,16 +6,17 @@ function resolve(dir) {
 }
 
 module.exports = {
+  lintOnSave: false,
   devServer: {
-    port: 8080,
+    port: 7778,
     host: '127.0.0.1',
     https: false,
     proxy: {
       '/api': {
-        target: 'http://127.0.0.1:50001/api',
+        target: 'http://127.0.0.1:7777/api',
         changeOrigin: true,
         pathRewrite: {
-          '^/api': ''
+          '^/api': '/'
         }
       }
     }
@@ -28,5 +29,5 @@ module.exports = {
         '@': resolve('src')
       }
     }
-  },
+  }
 }
