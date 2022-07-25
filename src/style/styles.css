@@ -12173,15 +12173,25 @@ header.masthead .post-heading .meta a {
   color: #0085A1;
 }
 
+.post-preview>a>.post-subtitle:focus,
+.post-preview>a>.post-subtitle:hover {
+  color: #0085A1;
+}
+
+.post-preview>a>.post-subtitle>.github-markdown-body {
+  padding: 0px 16px 0px;
+}
+
 .post-preview>a>.post-title {
   font-size: 1.875rem;
-  margin-top: 1.875rem;
+  margin-top: 1.375rem;
   margin-bottom: 0.625rem;
 }
 
 .post-preview>a>.post-subtitle {
   font-weight: 300;
   margin-bottom: 0.625rem;
+  color: #a3a3a3;
 }
 
 .post-preview>.post-meta {

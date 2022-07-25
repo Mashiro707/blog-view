@@ -1,39 +1,55 @@
 <template>
-  <div class="container px-4 px-lg-5">
-    <div class="row gx-4 gx-lg-5 justify-content-center">
-      <div class="col-md-10 col-lg-8 col-xl-7">
-        <div v-for="article in articleList" :key="article.id">
-          <!-- Post preview-->
-          <div class="post-preview">
-            <router-link :to="{ path: '/article', query: { id: article.id }}">
-              <h2 class="post-title">{{ article.title }}</h2>
-              <v-md-preview class="post-subtitle" :text="article.description" />
-            </router-link>
-            <p class="post-meta">
-              Posted by
-              <a href="">Mashiro</a>
-              on {{ $filters.dateFormat(article.create_time) }}
-            </p>
+  <div>
+    <header
+      class="masthead"
+      style="background-image: url('http://img.mashiro.org.cn/background.png')"
+    >
+      <div class="container position-relative px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+          <div class="col-md-10 col-lg-8 col-xl-7">
+            <div class="site-heading">
+              <h1>Mashiro Blog</h1>
+            </div>
           </div>
-          <!-- Divider-->
-          <hr class="my-4">
         </div>
-        <!-- Pager-->
-        <div
-          v-if="requestInfo.page_num > 1"
-          class="d-flex justify-content-end mb-4"
-          style="float: left"
-        >
-          <a
-            class="btn btn-lg btn-outline-dark text-uppercase"
-            @click="handleCurrentChange(-1)"
-          >Newer Posts</a>
-        </div>
-        <div class="d-flex justify-content-end mb-4">
-          <a
-            class="btn btn-lg btn-outline-dark text-uppercase"
-            @click="handleCurrentChange(1)"
-          >Older Posts</a>
+      </div>
+    </header>
+    <div class="container px-4 px-lg-5">
+      <div class="row gx-4 gx-lg-5 justify-content-center">
+        <div class="col-md-10 col-lg-8 col-xl-7">
+          <div v-for="article in articleList" :key="article.id">
+            <!-- Post preview-->
+            <div class="post-preview">
+              <router-link :to="{ path: '/article', query: { id: article.id }}">
+                <h2 class="post-title">{{ article.title }}</h2>
+                <v-md-preview class="post-subtitle" :text="article.description" />
+              </router-link>
+              <p class="post-meta">
+                Posted by
+                <a href="">Mashiro</a>
+                on {{ $filters.dateFormat(article.create_time) }}
+              </p>
+            </div>
+            <!-- Divider-->
+            <hr class="my-4">
+          </div>
+          <!-- Pager-->
+          <div
+            v-if="requestInfo.page_num > 1"
+            class="d-flex justify-content-end mb-4"
+            style="float: left"
+          >
+            <a
+              class="btn btn-lg btn-outline-dark text-uppercase"
+              @click="handleCurrentChange(-1)"
+            >Newer Posts</a>
+          </div>
+          <div class="d-flex justify-content-end mb-4">
+            <a
+              class="btn btn-lg btn-outline-dark text-uppercase"
+              @click="handleCurrentChange(1)"
+            >Older Posts</a>
+          </div>
         </div>
       </div>
     </div>
